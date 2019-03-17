@@ -20,8 +20,6 @@ login.init_app(app)
 login.login_view = 'login'
 db = SQLAlchemy(app)
 
-# Route for handling the login page logic
-
 class Task(db.Model):
     '''
     Define task name and status as well as connect it to the user table.
