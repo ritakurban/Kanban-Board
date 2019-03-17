@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- CSS styling -->
+  <style>
+  header {
+    background-color: #1abc9d;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+  }
+
+  section {  background-color:white;
+    padding: 1px;
+    text-align: center;
+    color: black;
+  }
+  li {
+   list-style-type: none;
+   width: 250px;
+  }
+  body {  background-color: white;
+    padding: 10px;
+    text-align: center;
+    color: black;}
+  h2 {margin:5px;}
+  .container {width: 31.7%; float:left;clear: right;margin:10px; border-radius: 5px;}
+  .sortable { list-style-type: none; margin:0; padding:2px; min-height:30px; border-radius: 5px;}
+  .sortable li { margin: 3px 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px;}
+  .sortable li span { position: absolute; margin-left: -1.3em; }
+
+  .card{background-color:white;border-radius:5px;}
+  </style>
+
+  <title>Rita's Kanban Board</title>
+    <link rel="shortcut icon" href="/Users/ritakurban/Downloads/k.png" type="image/x-icon">
+ </head>
+ <header>
+   <!-- Show current user's name -->
+   {% if current_user.is_authenticated%}
+  <h2>{{ current_user.username }}'s Kanban Board</h2>
+{% endif %}
+ </header>
+  <body>
+    <br></br>
+
+<h2 align="center">Add a New Task </h2>
+    <form method="POST" action="/main">
+      <input type="text" name="title" required>
+      <!-- <input type="hidden" value="Evgeny" name="user_id"> -->
+    <select name="status">
+    <option> todo </option>
+    <option> doing </option>
+    <option> done</option>
+  </select>
+      <!-- <input type="text" name="status"> -->
+      <input type="submit" value="Add">
+    </form>
+    <p></p>
+
+    <form method="POST" action="/logout">
+    <input type="submit" value="Logout">
+  </form>
+  {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+  {% endif %}
+    <p></p>
+    <section>
+    <div>
+    <div class="container" style="background-color:#1abc9d;">
+    <h2 style="color:#FFFFFF">TO DO</h2>
+
+<!-- Update todo, doing, and done fields -->
+    <table>
+      {% for task in todo %}
+        <tr>
+          <td>
+            <ul class="sortable connectedSortable" >
+              <li class="card" class="card" width=31>  {{task.title}} </li>
+            </ul>
+          </td>
+          <td>
+            <form method="POST" action="./update" style="display: inline">
+              <input type="hidden" value="{{task.title}}" name="name">
+              <input type="hidden" value="doing" name="newstatus">
+              <!-- <form method="POST" action="./delete" style="display: inline"> -->
+              <input type="submit" value="&#10004">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{task.title}}" name="title">
+              <input type="submit" value="&#10006">
+
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+  </div>
+  <div class="container" style="background-color:#1abc9d;">
+  <h2 style="color:#FFFFFF">DOING</h2>
+  <table>
+    {% for task in doing %}
+      <tr>
+        <td>
+          <ul class="sortable connectedSortable" >
+            <li class="card" class="card" width=31>  {{task.title}}</li>
+          </ul>
+        </td>
+        <td>
+          <form method="POST" action="./update" style="display: inline">
+            <input type="hidden" value="{{task.title}}" name="name">
+            <input type="hidden" value="done" name="newstatus">
+            <input type="submit" value="&#10004">
+
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="./delete" style="display: inline">
+            <input type="hidden" value="{{task.title}}" name="title">
+            <input type="submit" value="&#10006">
+
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+  </table>
+  </div>
+  <div class="container" style="background-color:#1abc9d;">
+  <h2 style="color:#FFFFFF">DONE</h2>
+  <table>
+    {% for task in done %}
+      <tr>
+        <td>
+          <ul class="sortable connectedSortable" >
+            <li class="card" class="card" width=31>  {{task.title}}</li>
+          </ul>
+        </td>
+        <td>
+          <form method="POST" action="./delete" style="display: inline">
+            <input type="hidden" value="{{task.title}}" name="title">
+            <input type="submit" value="&#10006">
+
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+  </table>
+  </div>
+  </div>
+  </section>
+  </body>
+</html>
