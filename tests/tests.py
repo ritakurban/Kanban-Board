@@ -28,56 +28,47 @@ class BasicTests(unittest.TestCase):
 
 # Tests
 
-    # def test_main_page(self):
-    #     '''
-    #     Test that the main page is loaded successfully.
-    #     '''
-    #     req = self.app.get('/main', follow_redirects=True)
-    #     self.assertEqual(req.status_code, 200)
-    #
-    # def test_login(self):
-    #     '''
-    #     Test that the app shows the login page if the user is not logged in.
-    #     '''
-    #     req = requests.get('http://127.0.0.1:5000/')
-    #     self.assertEqual(req.url, 'http://127.0.0.1:5000/login')
-    #
-    # def test_registration(self):
-    #     '''
-    #     Test that registration succeeds and a registered user can get to the main page.
-    #     '''
-    #     details = {'username':'Dolly', 'password':'ncelekckln!mv', 'repeat':'ncelekckln!mv'}
-    #     req = requests.post('http://127.0.0.1:5000/register', data = details)
-    #     req = requests.post('http://127.0.0.1:5000/login', data = details)
-    #     self.assertEqual(req.url, 'http://127.0.0.1:5000/main')
-    #
-    #
-    # def test_right_login(self):
-    #     '''
-    #     Test that users with correct credentials can access their board.
-    #     '''
-    #     details = {'username':'Dolly',  'password':'ncelekckln!mv'}
-    #     req = requests.post('http://127.0.0.1:5000/login', data = details)
-    #
-    #     self.assertEqual(req.url, 'http://127.0.0.1:5000/main')
-    #
-    # def test_faulty_login(self):
-    #     '''
-    #     Test that users with incorrect credentials remain on login page.
-    #     '''
-    #     details = {'username':'Rita', 'password':'fake'}
-    #     req = requests.post('http://127.0.0.1:5000/login', data = details)
-    #
-    #     self.assertEqual(req.url, 'http://127.0.0.1:5000/login')
+    def test_main_page(self):
+        '''
+        Test that the main page is loaded successfully.
+        '''
+        req = self.app.get('/main', follow_redirects=True)
+        self.assertEqual(req.status_code, 200)
 
-    def add_task(self):
+    def test_login(self):
         '''
-        Test that users can add tasks to the board.
+        Test that the app shows the login page if the user is not logged in.
         '''
-        details = {'id':'1', 'title':'Write a poem', 'status':'todo', 'user_id':'1'}
-        req = requests.post('http://127.0.0.1:5000/main', data = details)
+        req = requests.get('http://127.0.0.1:5000/')
+        self.assertEqual(req.url, 'http://127.0.0.1:5000/login')
+
+    def test_registration(self):
+        '''
+        Test that registration succeeds and a registered user can get to the main page.
+        '''
+        details = {'username':'Dolly', 'password':'ncelekckln!mv', 'repeat':'ncelekckln!mv'}
+        req = requests.post('http://127.0.0.1:5000/register', data = details)
+        req = requests.post('http://127.0.0.1:5000/login', data = details)
+        self.assertEqual(req.url, 'http://127.0.0.1:5000/main')
+
+
+    def test_right_login(self):
+        '''
+        Test that users with correct credentials can access their board.
+        '''
+        details = {'username':'Dolly',  'password':'ncelekckln!mv'}
+        req = requests.post('http://127.0.0.1:5000/login', data = details)
 
         self.assertEqual(req.url, 'http://127.0.0.1:5000/main')
+
+    def test_faulty_login(self):
+        '''
+        Test that users with incorrect credentials remain on login page.
+        '''
+        details = {'username':'Rita', 'password':'fake'}
+        req = requests.post('http://127.0.0.1:5000/login', data = details)
+
+        self.assertEqual(req.url, 'http://127.0.0.1:5000/login')
 
 
 
