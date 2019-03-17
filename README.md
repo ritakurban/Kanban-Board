@@ -35,7 +35,7 @@ exit()
 ## Run the App 
 ```python
 
-python app.py
+python kanban.py
  
 #Then go to --> http://127.0.0.1:5000/ <--
  ```
