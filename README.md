@@ -25,6 +25,7 @@ pip3 install -r requirements.txt
 
 ## Set Up the Database
 ```python
+#run from the Python shell (by typing python3 in the terminal)
 from kanban import db
 db.create_all()
 exit()
