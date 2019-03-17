@@ -11,7 +11,7 @@ This project is an implementation of a Kanban Board with three sections "To do",
 5. Transfer tasks from "To Do" to "Doing" and from "Doing" to "Done".
 6. Logout from the app.
 
-Each user can maintain their own Kanban board that is not visible for other users.
+Each user can maintain their own Kanban board that is not visible to other users.
 
 To run it on your computer, clone the repository and do the set up from the `'.../Kanban-Board-master/'`  directory. 
 
